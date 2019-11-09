@@ -1,0 +1,24 @@
+﻿@model Projek_Restoran.Models.JenisPesanan
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>JenisPesanan</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NamaJenisPesanan)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NamaJenisPesanan)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdJenisPesanan">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

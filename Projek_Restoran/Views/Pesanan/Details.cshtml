@@ -1,0 +1,72 @@
+﻿@model Projek_Restoran.Models.Pesanan
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Pesanan</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NamaCustomer)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NamaCustomer)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Jumlah)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Jumlah)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Tanggal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tanggal)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Keterangan)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Keterangan)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdMeja)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdMeja)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdJenisPesananNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdJenisPesananNavigation.IdJenisPesanan)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdProdukNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdProdukNavigation.IdProduk)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdUser1)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdUser1.IdUser)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdUserNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdUserNavigation.IdMeja)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdPesanan">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

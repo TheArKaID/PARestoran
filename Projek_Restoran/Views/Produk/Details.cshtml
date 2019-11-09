@@ -1,0 +1,36 @@
+﻿@model Projek_Restoran.Models.Produk
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Produk</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nama)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nama)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Harga)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Harga)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdKategoriNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdKategoriNavigation.IdKategori)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdProduk">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
