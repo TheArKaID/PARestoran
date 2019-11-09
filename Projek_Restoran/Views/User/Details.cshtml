@@ -4,32 +4,32 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<h2>Detail</h2>
 
 <div>
     <h4>User</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Nama)
+            @Html.DisplayName("Nama User")
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Nama)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.NoHp)
+            @Html.DisplayName("Nomor HP")
         </dt>
         <dd>
             @Html.DisplayFor(model => model.NoHp)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Username)
+            @Html.DisplayName("Username")
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Username)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Password)
+            @Html.DisplayName("Password")
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Password)
@@ -37,6 +37,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.IdUser">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.IdUser">Ubah</a> |
+    <a asp-action="Index">Kembali</a>
 </div>
