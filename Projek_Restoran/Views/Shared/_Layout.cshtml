@@ -30,9 +30,19 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li class="dropdown yamm-fw">
+                    <li>
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle" data-hover="dropdown">Daftar Menu<b class="caret"></b></a>
+                        <ul class="dropdown-menu mega-menu animated-fadeIn">
+                            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li><a asp-area="" asp-controller="JenisPesanan" asp-action="Index">Jenis Pesanan</a></li>
+                            <li><a asp-area="" asp-controller="Pesanan" asp-action="Index">Pesanan</a></li>
+                            <li><a asp-area="" asp-controller="Produk" asp-action="Index">Produk</a></li>
+                            <li><a asp-area="" asp-controller="User" asp-action="Index">User</a></li>
+                            <li><a asp-area="" asp-controller="Kategori" asp-action="Index">Kategori</a></li>
+                            <li><a asp-area="" asp-controller="Meja" asp-action="Index">Meja</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
