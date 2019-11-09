@@ -23,7 +23,7 @@
             @Html.DisplayFor(model => model.Harga)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.IdKategoriNavigation)
+            @Html.DisplayName("Kategori")
         </dt>
         <dd>
             @Html.DisplayFor(model => model.IdKategoriNavigation.IdKategori)
@@ -31,6 +31,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.IdProduk">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.IdProduk">Ubah</a> |
+    <a asp-action="Index">Kembali</a>
 </div>

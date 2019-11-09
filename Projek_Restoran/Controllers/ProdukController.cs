@@ -47,7 +47,7 @@ namespace Projek_Restoran.Controllers
         // GET: Produk/Create
         public IActionResult Create()
         {
-            ViewData["IdKategori"] = new SelectList(_context.Kategori, "IdKategori", "IdKategori");
+            ViewData["IdKategori"] = new SelectList(_context.Kategori, "IdKategori", "NamaKategori");
             return View();
         }
 
@@ -64,7 +64,7 @@ namespace Projek_Restoran.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdKategori"] = new SelectList(_context.Kategori, "IdKategori", "IdKategori", produk.IdKategori);
+            ViewData["IdKategori"] = new SelectList(_context.Kategori, "IdKategori", "NamaKategori", produk.IdKategori);
             return View(produk);
         }
 
@@ -81,7 +81,7 @@ namespace Projek_Restoran.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdKategori"] = new SelectList(_context.Kategori, "IdKategori", "IdKategori", produk.IdKategori);
+            ViewData["IdKategori"] = new SelectList(_context.Kategori, "IdKategori", "NamaKategori", produk.IdKategori);
             return View(produk);
         }
 
@@ -117,7 +117,7 @@ namespace Projek_Restoran.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdKategori"] = new SelectList(_context.Kategori, "IdKategori", "IdKategori", produk.IdKategori);
+            ViewData["IdKategori"] = new SelectList(_context.Kategori, "IdKategori", "NamaKategori", produk.IdKategori);
             return View(produk);
         }
 
