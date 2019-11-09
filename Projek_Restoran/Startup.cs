@@ -34,7 +34,7 @@ namespace Projek_Restoran
             });
 
             services.AddDbContext<Models.WEB_ProjekAkhirContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("Default")));
+            options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
