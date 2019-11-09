@@ -4,50 +4,51 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>Tambah Data User</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Buat Baru</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nama)
+                @Html.DisplayName("Nama User")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NoHp)
+                @Html.DisplayName("Nomor HP")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Username)
+                @Html.DisplayName("Username")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Password)
+                @Html.DisplayName("Password")
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nama)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NoHp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Username)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdUser">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdUser">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdUser">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nama)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NoHp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdUser">Ubah</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdUser">Detail</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdUser">Hapus</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

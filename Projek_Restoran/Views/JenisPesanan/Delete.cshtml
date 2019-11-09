@@ -4,15 +4,15 @@
     ViewData["Title"] = "Delete";
 }
 
-<h2>Delete</h2>
+<h2>Hapus Data</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Apakah Kamu Yakin Ingin Menghapus ini ?</h3>
 <div>
     <h4>JenisPesanan</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.NamaJenisPesanan)
+            @Html.DisplayName("Jenis Pesanan")
         </dt>
         <dd>
             @Html.DisplayFor(model => model.NamaJenisPesanan)
@@ -21,7 +21,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdJenisPesanan" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Hapus" class="btn btn-default" /> |
+        <a asp-action="Index">Kembali</a>
     </form>
 </div>
