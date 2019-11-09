@@ -11,55 +11,55 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.NamaCustomer)
+            @Html.DisplayName("Nama Customer")
         </dt>
         <dd>
             @Html.DisplayFor(model => model.NamaCustomer)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Jumlah)
+            @Html.DisplayName("Jumlah")
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Jumlah)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Tanggal)
+            @Html.DisplayName("Tanggal")
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Tanggal)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Keterangan)
+            @Html.DisplayName("Keterangan")
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Keterangan)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.IdMeja)
+            @Html.DisplayName("No Meja")
         </dt>
         <dd>
             @Html.DisplayFor(model => model.IdMeja)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.IdJenisPesananNavigation)
+            @Html.DisplayName("Jenis Pesanan")
         </dt>
         <dd>
             @Html.DisplayFor(model => model.IdJenisPesananNavigation.IdJenisPesanan)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.IdProdukNavigation)
+            @Html.DisplayName("Produk")
         </dt>
         <dd>
             @Html.DisplayFor(model => model.IdProdukNavigation.IdProduk)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.IdUser1)
+            @Html.DisplayName("Admin")
         </dt>
         <dd>
             @Html.DisplayFor(model => model.IdUser1.IdUser)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.IdUserNavigation)
+            @Html.DisplayName("ID User")
         </dt>
         <dd>
             @Html.DisplayFor(model => model.IdUserNavigation.IdMeja)
@@ -67,6 +67,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.IdPesanan">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.IdPesanan">Ubah</a> |
+    <a asp-action="Index">Kembali</a>
 </div>
