@@ -1,83 +1,85 @@
 ﻿@model IEnumerable<Projek_Restoran.Models.Pesanan>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Pesanan";
 }
 
-<h2>Index</h2>
+<h2>@ViewData["Title"]</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-info" asp-action="Create">Tambah Data</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NamaCustomer)
+                @Html.DisplayName("Nama Customer")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Jumlah)
+                @Html.DisplayName("Jumlah")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Tanggal)
+                @Html.DisplayName("Tanggal")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Keterangan)
+                @Html.DisplayName("Keterangan")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdMeja)
+                @Html.DisplayName("No Meja")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdJenisPesananNavigation)
+                @Html.DisplayName("Jenis Pesanan")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdProdukNavigation)
+                @Html.DisplayName("Produk")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdUser1)
+                @Html.DisplayName("Admin")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdUserNavigation)
+                @Html.DisplayName("ID User")
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NamaCustomer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Jumlah)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tanggal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Keterangan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdMeja)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdJenisPesananNavigation.IdJenisPesanan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdProdukNavigation.IdProduk)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdUser1.IdUser)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdUserNavigation.IdMeja)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdPesanan">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdPesanan">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdPesanan">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NamaCustomer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Jumlah)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tanggal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Keterangan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdMeja)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdJenisPesananNavigation.IdJenisPesanan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdProdukNavigation.IdProduk)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdUser1.IdUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdUserNavigation.IdMeja)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdPesanan">Ubah</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdPesanan">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdPesanan">Hapus</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
