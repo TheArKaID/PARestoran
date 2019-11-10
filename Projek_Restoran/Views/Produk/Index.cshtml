@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Projek_Restoran.Models.Produk>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Produk";
 }
 
-<h2>Index</h2>
+<h2>@ViewData["Title"]</h2>
 
 <p>
     <a class="btn btn-info" asp-action="Create">Tambah Data</a>
@@ -12,9 +12,9 @@
 @using (Html.BeginForm("index", "Produk", FormMethod.Get))
 {
     <p>
-        Nama: @Html.DropDownList("ket", "Pilih Nama")
-        Cari Data : @Html.TextBox("searchString")
-        <input type ="submit" value="filter"/>
+        Nama: @Html.DropDownList("ket", null, "Pilih Nama", new { @class = "form-control"})
+        Cari Data : @Html.TextBox("searchString", null, new { @class = "form-control", @style = "margin: 10px 0px 10px 0px;", @placeholder = "Nama" })
+        <input class="btn btn-primary" type ="submit" value="filter"/>
     </p>
 }
 <table class="table">
