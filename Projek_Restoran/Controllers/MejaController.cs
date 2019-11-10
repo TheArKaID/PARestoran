@@ -24,14 +24,14 @@ namespace Projek_Restoran.Controllers
             var nmrList = new List<string>();
 
             //Query Mengambil Data
-            var nmrQuery = from d in _context.Meja orderby d.NomorMeja select d.NomorMeja;
+            var nmrQuery = from d in _context.Meja orderby d.IdMeja select d.NomorMeja;
 
-            nmrList.AddRange(nmrQuery.Distinct());
+            nmrList.AddRange(nmrQuery);
 
             //untuk menampilkan di view
             ViewBag.nmr = new SelectList(nmrList);
 
-            var menu = from m in _context.Meja.Include(k => k.NomorMeja) select m;
+            var menu = from m in _context.Meja select m;
 
             if (!string.IsNullOrEmpty(nmr))
             {
@@ -41,7 +41,7 @@ namespace Projek_Restoran.Controllers
             {
                 menu = menu.Where(x => x.NomorMeja.Contains(searchString));
             }
-            return View(await _context.Meja.ToListAsync());
+            return View(await menu.ToListAsync());
         }
 
         // GET: Meja/Details/5
