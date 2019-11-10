@@ -19,22 +19,22 @@ namespace Projek_Restoran.Controllers
         }
 
         // GET: Pesanan
-        public async Task<IActionResult> Index(string search, string Jenis, string Produk, string Admin)
+        public async Task<IActionResult> Index(string Srch, string Jenis, string Meja, string Admin, string Tanggal)
         {
             var listJenis = new List<string>();
-            var listProduk = new List<string>();
+            var listMeja = new List<string>();
             var listAdmin = new List<string>();
 
             var dataJenis = from jenis in _context.JenisPesanan select jenis.NamaJenisPesanan;
-            var dataProduk = from produk in _context.Produk select produk.Nama;
+            var dataMeja = from meja in _context.Meja select meja.NomorMeja;
             var dataAdmin = from admin in _context.User select admin.Nama;
 
             listJenis.AddRange(dataJenis.Distinct());
-            listProduk.AddRange(dataProduk.Distinct());
+            listMeja.AddRange(dataMeja.Distinct());
             listAdmin.AddRange(dataAdmin.Distinct());
 
             ViewBag.Jenis = new SelectList(listJenis);
-            ViewBag.Produk = new SelectList(listProduk);
+            ViewBag.Meja = new SelectList(listMeja);
             ViewBag.Admin = new SelectList(listAdmin);
 
             var data = from Data in _context.Pesanan.Include(p => p.IdJenisPesananNavigation).Include(p => p.IdProdukNavigation).Include(p => p.IdUserNavigation).Include(p => p.IdMejaNavigation) select Data;
@@ -44,9 +44,9 @@ namespace Projek_Restoran.Controllers
                 data = data.Where(x => x.IdJenisPesananNavigation.NamaJenisPesanan == Jenis);
             }
 
-            if (!string.IsNullOrEmpty(Produk) || !string.IsNullOrWhiteSpace(Produk))
+            if (!string.IsNullOrEmpty(Meja) || !string.IsNullOrWhiteSpace(Meja))
             {
-                data = data.Where(x => x.IdProdukNavigation.Nama == Produk);
+                data = data.Where(x => x.IdMejaNavigation.NomorMeja == Meja);
             }
 
             if (!string.IsNullOrEmpty(Admin) || !string.IsNullOrWhiteSpace(Admin))
@@ -54,9 +54,15 @@ namespace Projek_Restoran.Controllers
                 data = data.Where(x => x.IdUserNavigation.Nama == Admin);
             }
 
-            if (!string.IsNullOrEmpty(search) || !string.IsNullOrWhiteSpace(search))
+            if (!string.IsNullOrEmpty(Tanggal))
             {
-                data = data.Where(x => x.NamaCustomer.Contains(search) || x.Keterangan.Contains(search));
+                DateTime dateTime = Convert.ToDateTime(Tanggal);
+                data = data.Where(x => x.Tanggal == dateTime);
+            }
+
+            if (!string.IsNullOrEmpty(Srch) || !string.IsNullOrWhiteSpace(Srch))
+            {
+                data = data.Where(x => x.NamaCustomer.Contains(Srch) || x.IdProdukNavigation.Nama.Contains(Srch) || x.Jumlah.Contains(Srch) || x.IdJenisPesananNavigation.NamaJenisPesanan.Contains(Srch) || x.IdMejaNavigation.NomorMeja.Contains(Srch) || x.Keterangan.Contains(Srch) || x.IdUserNavigation.Nama.Contains(Srch));
             }
             
             return View(await data.ToListAsync());

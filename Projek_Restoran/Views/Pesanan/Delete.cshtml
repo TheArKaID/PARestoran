@@ -4,9 +4,9 @@
     ViewData["Title"] = "Hapus";
 }
 
-<h2>@ViewData["Title"]</h2>
+<h2>Hapus Data</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Apakah Kamu Yakin Ingin Menghapus ini ?</h3>
 <div>
     <h4>Pesanan</h4>
     <hr />
@@ -60,10 +60,10 @@
             @Html.DisplayFor(model => model.IdUserNavigation.Nama)
         </dd>
     </dl>
-    
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdPesanan" />
-        <input type="submit" value="Hapus" class="btn btn-default" /> |
+        <input type="submit" value="Hapus" class="btn btn-danger" /> |
         <a asp-action="Index">Kembali</a>
     </form>
 </div>

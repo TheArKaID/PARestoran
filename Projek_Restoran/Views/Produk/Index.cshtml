@@ -4,19 +4,27 @@
     ViewData["Title"] = "Produk";
 }
 
-<h2>@ViewData["Title"]</h2>
+<h2>Tambah Data Produk</h2>
 
 <p>
-    <a class="btn btn-info" asp-action="Create">Tambah Data</a>
+    <a class="btn btn-info" asp-action="Create">Tambah Data Baru</a>
+
+    @using (Html.BeginForm("Index", "Produk", FormMethod.Get))
+    {
+        <div class="col-md-3">
+            @Html.DropDownList("ktgr", null, "Filter Kategori", new { @class = "form-control" })
+        </div>
+        <div class="col-md-3">
+            @Html.TextBox("srch", null, new { @class = "form-control", @placeholder = "Cari Data Produk" })
+        </div>
+        <div class="col-md-1">
+            <input class="btn btn-primary" type="submit" value="Search" />
+        </div>
+    }
+
+
 </p>
-@using (Html.BeginForm("index", "Produk", FormMethod.Get))
-{
-    <p>
-        Nama: @Html.DropDownList("ket", null, "Pilih Nama", new { @class = "form-control"})
-        Cari Data : @Html.TextBox("searchString", null, new { @class = "form-control", @style = "margin: 10px 0px 10px 0px;", @placeholder = "Nama" })
-        <input class="btn btn-primary" type ="submit" value="filter"/>
-    </p>
-}
+
 <table class="table">
     <thead>
         <tr>
@@ -33,23 +41,24 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nama)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Harga)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdKategoriNavigation.NamaKategori)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdProduk">Ubah</a> |
-                <a asp-action="Details" asp-route-id="@item.IdProduk">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdProduk">Hapus</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nama)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Harga)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdKategoriNavigation.NamaKategori)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdProduk">Ubah</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdProduk">Detail</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdProduk">Hapus</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

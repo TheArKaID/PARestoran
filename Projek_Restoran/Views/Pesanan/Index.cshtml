@@ -4,28 +4,30 @@
     ViewData["Title"] = "Pesanan";
 }
 
-<h2>@ViewData["Title"]</h2>
+<h2>Tambah Data Pesanan</h2>
 
 <p>
-    <a class="btn btn-info" asp-action="Create">Tambah Data</a>
+    <a class="btn btn-info" asp-action="Create">Tambah Data Pesanan</a>
 </p>
 <div>
     @using (Html.BeginForm("Index", "Pesanan", FormMethod.Get))
     {
-        <div class="col-md-4">
-            @Html.DropDownList("Jenis", null, "Pilih Jenis Pesanan", new { @class = "form-control" })
+        <div class="col-md-3">
+            @Html.DropDownList("Jenis", null, "Filter Jenis Pesanan", new { @class = "form-control" })
         </div>
-        <div class="col-md-4">
-            @Html.DropDownList("Produk", null, "Pilih Produk", new { @class = "form-control" })
+        <div class="col-md-2">
+            @Html.DropDownList("Meja", null, "Filter Meja", new { @class = "form-control" })
         </div>
-        <div class="col-md-4">
-            @Html.DropDownList("Admin", null, "Pilih Admin", new { @class = "form-control" })
+        <div class="col-md-2">
+            @Html.DropDownList("Admin", null, "Filter Admin", new { @class = "form-control" })
         </div>
-        <div class="col-md-12" style="margin: 10px 0px 10px 0px;">
-            @Html.TextBox("search", null, new { @class = "form-control", @placeholder = "Nama Customer atau Keterangan" })
+        <div class="col-md-2">
+            @Html.TextBox("Tanggal", "{0:dd/MM/yyyy}", new { @class = "form-control datepicker", @type = "date" })
         </div>
-
-        <div class="col-md-12">
+        <div class="col-md-2">
+            @Html.TextBox("Srch", null, new { @class = "form-control", @placeholder = "Cari Data Pesanan" })
+        </div>
+        <div class="col-md-1">
             <input class="btn btn-primary" type="submit" value="Search" />
         </div>
     }
@@ -63,37 +65,37 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NamaCustomer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdProdukNavigation.Nama)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Jumlah)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdJenisPesananNavigation.NamaJenisPesanan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdMejaNavigation.NomorMeja)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tanggal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Keterangan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdUserNavigation.Nama)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdPesanan">Ubah</a> |
-                <a asp-action="Details" asp-route-id="@item.IdPesanan">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdPesanan">Hapus</a>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NamaCustomer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdProdukNavigation.Nama)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Jumlah)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdJenisPesananNavigation.NamaJenisPesanan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdMejaNavigation.NomorMeja)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tanggal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Keterangan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdUserNavigation.Nama)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdPesanan">Ubah</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdPesanan">Detail</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdPesanan">Hapus</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
