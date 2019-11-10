@@ -9,7 +9,27 @@
 <p>
     <a class="btn btn-info" asp-action="Create">Tambah Data</a>
 </p>
+<div>
+    @using (Html.BeginForm("Index", "Pesanan", FormMethod.Get))
+    {
+        <div class="col-md-4">
+            @Html.DropDownList("Jenis", null, "Pilih Jenis Pesanan", new { @class = "form-control" })
+        </div>
+        <div class="col-md-4">
+            @Html.DropDownList("Produk", null, "Pilih Produk", new { @class = "form-control" })
+        </div>
+        <div class="col-md-4">
+            @Html.DropDownList("Admin", null, "Pilih Admin", new { @class = "form-control" })
+        </div>
+        <div class="col-md-12" style="margin: 10px 0px 10px 0px;">
+            @Html.TextBox("search", null, new { @class = "form-control", @placeholder = "Nama Customer atau Keterangan" })
+        </div>
 
+        <div class="col-md-12">
+            <input class="btn btn-primary" type="submit" value="Search" />
+        </div>
+    }
+</div>
 <table class="table">
     <thead>
         <tr>

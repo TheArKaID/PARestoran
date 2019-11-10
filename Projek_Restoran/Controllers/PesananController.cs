@@ -19,10 +19,47 @@ namespace Projek_Restoran.Controllers
         }
 
         // GET: Pesanan
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search, string Jenis, string Produk, string Admin)
         {
-            var wEB_ProjekAkhirContext = _context.Pesanan.Include(p => p.IdJenisPesananNavigation).Include(p => p.IdProdukNavigation).Include(p => p.IdUserNavigation).Include(p => p.IdMejaNavigation);
-            return View(await wEB_ProjekAkhirContext.ToListAsync());
+            var listJenis = new List<string>();
+            var listProduk = new List<string>();
+            var listAdmin = new List<string>();
+
+            var dataJenis = from jenis in _context.JenisPesanan select jenis.NamaJenisPesanan;
+            var dataProduk = from produk in _context.Produk select produk.Nama;
+            var dataAdmin = from admin in _context.User select admin.Nama;
+
+            listJenis.AddRange(dataJenis.Distinct());
+            listProduk.AddRange(dataProduk.Distinct());
+            listAdmin.AddRange(dataAdmin.Distinct());
+
+            ViewBag.Jenis = new SelectList(listJenis);
+            ViewBag.Produk = new SelectList(listProduk);
+            ViewBag.Admin = new SelectList(listAdmin);
+
+            var data = from Data in _context.Pesanan.Include(p => p.IdJenisPesananNavigation).Include(p => p.IdProdukNavigation).Include(p => p.IdUserNavigation).Include(p => p.IdMejaNavigation) select Data;
+
+            if (!string.IsNullOrEmpty(Jenis) || !string.IsNullOrWhiteSpace(Jenis))
+            {
+                data = data.Where(x => x.IdJenisPesananNavigation.NamaJenisPesanan == Jenis);
+            }
+
+            if (!string.IsNullOrEmpty(Produk) || !string.IsNullOrWhiteSpace(Produk))
+            {
+                data = data.Where(x => x.IdProdukNavigation.Nama == Produk);
+            }
+
+            if (!string.IsNullOrEmpty(Admin) || !string.IsNullOrWhiteSpace(Admin))
+            {
+                data = data.Where(x => x.IdUserNavigation.Nama == Admin);
+            }
+
+            if (!string.IsNullOrEmpty(search) || !string.IsNullOrWhiteSpace(search))
+            {
+                data = data.Where(x => x.NamaCustomer.Contains(search) || x.Keterangan.Contains(search));
+            }
+            
+            return View(await data.ToListAsync());
         }
 
         // GET: Pesanan/Details/5
