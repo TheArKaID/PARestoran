@@ -19,8 +19,28 @@ namespace Projek_Restoran.Controllers
         }
 
         // GET: Meja
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string nmr, string searchString)
         {
+            var nmrList = new List<string>();
+
+            //Query Mengambil Data
+            var nmrQuery = from d in _context.Meja orderby d.NomorMeja select d.NomorMeja;
+
+            nmrList.AddRange(nmrQuery.Distinct());
+
+            //untuk menampilkan di view
+            ViewBag.nmr = new SelectList(nmrList);
+
+            var menu = from m in _context.Meja.Include(k => k.NomorMeja) select m;
+
+            if (!string.IsNullOrEmpty(nmr))
+            {
+                menu = menu.Where(s => s.NomorMeja == nmr);
+            }
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                menu = menu.Where(x => x.NomorMeja.Contains(searchString));
+            }
             return View(await _context.Meja.ToListAsync());
         }
 

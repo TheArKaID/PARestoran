@@ -9,6 +9,14 @@
 <p>
     <a class="btn btn-info" asp-action="Create">Tambah Data</a>
 </p>
+@using (Html.BeginForm("index", "Produk", FormMethod.Get))
+{
+    <p>
+        Nama: @Html.DropDownList("ket", "Pilih Nama")
+        Cari Data : @Html.TextBox("searchString")
+        <input type ="submit" value="filter"/>
+    </p>
+}
 <table class="table">
     <thead>
         <tr>

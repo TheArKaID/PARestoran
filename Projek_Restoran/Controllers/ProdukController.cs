@@ -19,10 +19,27 @@ namespace Projek_Restoran.Controllers
         }
 
         // GET: Produk
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string ket, string searchString)
         {
-            var wEB_ProjekAkhirContext = _context.Produk.Include(p => p.IdKategoriNavigation);
-            return View(await wEB_ProjekAkhirContext.ToListAsync());
+            
+            var ketList = new List<string>();
+            var ketQuery = from d in _context.Produk orderby d.Nama select d.Nama;
+            ketList.AddRange(ketQuery.Distinct());
+            ViewBag.ket = new SelectList(ketList);
+            var menu = from m in _context.Produk.Include(k => k.IdKategoriNavigation) select m;
+
+            if (!string.IsNullOrEmpty(ket))
+            {
+                menu = menu.Where(x => x.Nama == ket);
+            }
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                menu = menu.Where(s => s.Nama.Contains(searchString));
+            }
+
+            //var wEB_ProjekAkhirContext = _context.Produk.Include(p => p.IdKategoriNavigation);
+            return View(await menu.ToListAsync());
         }
 
         // GET: Produk/Details/5
