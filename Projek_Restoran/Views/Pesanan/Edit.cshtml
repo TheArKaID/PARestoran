@@ -1,10 +1,10 @@
 ﻿@model Projek_Restoran.Models.Pesanan
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Ubah";
 }
 
-<h2>Edit</h2>
+<h2>@ViewData["Title"]</h2>
 
 <h4>Pesanan</h4>
 <hr />
@@ -29,14 +29,14 @@
                 <span asp-validation-for="Tanggal" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Keterangan" class="control-label">Keterangan</label>
-                <input asp-for="Keterangan" class="form-control" />
-                <span asp-validation-for="Keterangan" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="IdProduk" class="control-label">Produk</label>
                 <select asp-for="IdProduk" class="form-control" asp-items="ViewBag.IdProduk"></select>
                 <span asp-validation-for="IdProduk" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Keterangan" class="control-label">Keterangan</label>
+                <input asp-for="Keterangan" class="form-control" />
+                <span asp-validation-for="Keterangan" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdJenisPesanan" class="control-label">Jenis Pesanan</label>
@@ -45,7 +45,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdMeja" class="control-label">Meja</label>
-                <input asp-for="IdMeja" class="form-control" />
+                <select asp-for="IdMeja" class="form-control" asp-items="ViewBag.IdMeja"></select>
                 <span asp-validation-for="IdMeja" class="text-danger"></span>
             </div>
             <div class="form-group">

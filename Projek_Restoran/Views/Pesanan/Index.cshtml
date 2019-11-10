@@ -17,7 +17,16 @@
                 @Html.DisplayName("Nama Customer")
             </th>
             <th>
+                @Html.DisplayName("Produk")
+            </th>
+            <th>
                 @Html.DisplayName("Jumlah")
+            </th>
+            <th>
+                @Html.DisplayName("Jenis Pesanan")
+            </th>
+            <th>
+                @Html.DisplayName("Nomor Meja")
             </th>
             <th>
                 @Html.DisplayName("Tanggal")
@@ -26,19 +35,7 @@
                 @Html.DisplayName("Keterangan")
             </th>
             <th>
-                @Html.DisplayName("No Meja")
-            </th>
-            <th>
-                @Html.DisplayName("Jenis Pesanan")
-            </th>
-            <th>
-                @Html.DisplayName("Produk")
-            </th>
-            <th>
                 @Html.DisplayName("Admin")
-            </th>
-            <th>
-                @Html.DisplayName("ID User")
             </th>
             <th></th>
         </tr>
@@ -46,40 +43,37 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NamaCustomer)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Jumlah)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tanggal)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Keterangan)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdMeja)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdJenisPesananNavigation.IdJenisPesanan)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdProdukNavigation.IdProduk)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdUser1.IdUser)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdUserNavigation.IdMeja)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.IdPesanan">Ubah</a> |
-                    <a asp-action="Details" asp-route-id="@item.IdPesanan">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.IdPesanan">Hapus</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NamaCustomer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdProdukNavigation.Nama)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Jumlah)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdJenisPesananNavigation.NamaJenisPesanan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdMejaNavigation.NomorMeja)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tanggal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Keterangan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdUserNavigation.Nama)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdPesanan">Ubah</a> |
+                <a asp-action="Details" asp-route-id="@item.IdPesanan">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdPesanan">Hapus</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

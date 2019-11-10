@@ -7,6 +7,7 @@ namespace Projek_Restoran.Models
     public partial class Pesanan
     {
         public int IdPesanan { get; set; }
+
         [Required(ErrorMessage ="Nama Customer Harus diisi"), 
         MaxLength(30, ErrorMessage = "Maksimal 30 Karakter")]
         public string NamaCustomer { get; set; }
@@ -37,7 +38,7 @@ namespace Projek_Restoran.Models
 
         public JenisPesanan IdJenisPesananNavigation { get; set; }
         public Produk IdProdukNavigation { get; set; }
-        public User IdUser1 { get; set; }
-        public Meja IdUserNavigation { get; set; }
+        public User IdUserNavigation { get; set; }
+        public Meja IdMejaNavigation { get; set; }
     }
 }

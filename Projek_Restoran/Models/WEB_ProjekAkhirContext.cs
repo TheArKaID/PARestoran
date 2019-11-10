@@ -110,12 +110,12 @@ namespace Projek_Restoran.Models
                     .HasForeignKey(d => d.IdProduk)
                     .HasConstraintName("FK_Pesanan_Produk");
 
-                entity.HasOne(d => d.IdUserNavigation)
+                entity.HasOne(d => d.IdMejaNavigation)
                     .WithMany(p => p.Pesanan)
-                    .HasForeignKey(d => d.IdUser)
+                    .HasForeignKey(d => d.IdMeja)
                     .HasConstraintName("FK_Pesanan_Meja");
 
-                entity.HasOne(d => d.IdUser1)
+                entity.HasOne(d => d.IdUserNavigation)
                     .WithMany(p => p.Pesanan)
                     .HasForeignKey(d => d.IdUser)
                     .HasConstraintName("FK_Pesanan_User");

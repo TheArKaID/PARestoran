@@ -21,7 +21,7 @@ namespace Projek_Restoran.Controllers
         // GET: Pesanan
         public async Task<IActionResult> Index()
         {
-            var wEB_ProjekAkhirContext = _context.Pesanan.Include(p => p.IdJenisPesananNavigation).Include(p => p.IdProdukNavigation).Include(p => p.IdUser1).Include(p => p.IdUserNavigation);
+            var wEB_ProjekAkhirContext = _context.Pesanan.Include(p => p.IdJenisPesananNavigation).Include(p => p.IdProdukNavigation).Include(p => p.IdUserNavigation).Include(p => p.IdMejaNavigation);
             return View(await wEB_ProjekAkhirContext.ToListAsync());
         }
 
@@ -36,8 +36,8 @@ namespace Projek_Restoran.Controllers
             var pesanan = await _context.Pesanan
                 .Include(p => p.IdJenisPesananNavigation)
                 .Include(p => p.IdProdukNavigation)
-                .Include(p => p.IdUser1)
                 .Include(p => p.IdUserNavigation)
+                .Include(p => p.IdMejaNavigation)
                 .FirstOrDefaultAsync(m => m.IdPesanan == id);
             if (pesanan == null)
             {
@@ -50,10 +50,10 @@ namespace Projek_Restoran.Controllers
         // GET: Pesanan/Create
         public IActionResult Create()
         {
-            ViewData["IdJenisPesanan"] = new SelectList(_context.JenisPesanan, "IdJenisPesanan", "IdJenisPesanan");
-            ViewData["IdProduk"] = new SelectList(_context.Produk, "IdProduk", "IdProduk");
-            ViewData["IdUser"] = new SelectList(_context.User, "IdUser", "IdUser");
-            ViewData["IdUser"] = new SelectList(_context.Meja, "IdMeja", "IdMeja");
+            ViewData["IdJenisPesanan"] = new SelectList(_context.JenisPesanan, "IdJenisPesanan", "NamaJenisPesanan");
+            ViewData["IdProduk"] = new SelectList(_context.Produk, "IdProduk", "Nama");
+            ViewData["IdUser"] = new SelectList(_context.User, "IdUser", "Nama");
+            ViewData["IdMeja"] = new SelectList(_context.Meja, "IdMeja", "NomorMeja");
             return View();
         }
 
@@ -73,7 +73,7 @@ namespace Projek_Restoran.Controllers
             ViewData["IdJenisPesanan"] = new SelectList(_context.JenisPesanan, "IdJenisPesanan", "IdJenisPesanan", pesanan.IdJenisPesanan);
             ViewData["IdProduk"] = new SelectList(_context.Produk, "IdProduk", "IdProduk", pesanan.IdProduk);
             ViewData["IdUser"] = new SelectList(_context.User, "IdUser", "IdUser", pesanan.IdUser);
-            ViewData["IdUser"] = new SelectList(_context.Meja, "IdMeja", "IdMeja", pesanan.IdUser);
+            ViewData["IdMeja"] = new SelectList(_context.Meja, "IdMeja", "IdMeja", pesanan.IdMeja);
             return View(pesanan);
         }
 
@@ -90,10 +90,10 @@ namespace Projek_Restoran.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdJenisPesanan"] = new SelectList(_context.JenisPesanan, "IdJenisPesanan", "IdJenisPesanan", pesanan.IdJenisPesanan);
-            ViewData["IdProduk"] = new SelectList(_context.Produk, "IdProduk", "IdProduk", pesanan.IdProduk);
-            ViewData["IdUser"] = new SelectList(_context.User, "IdUser", "IdUser", pesanan.IdUser);
-            ViewData["IdUser"] = new SelectList(_context.Meja, "IdMeja", "IdMeja", pesanan.IdUser);
+            ViewData["IdJenisPesanan"] = new SelectList(_context.JenisPesanan, "IdJenisPesanan", "NamaJenisPesanan", pesanan.IdJenisPesanan);
+            ViewData["IdProduk"] = new SelectList(_context.Produk, "IdProduk", "Nama", pesanan.IdProduk);
+            ViewData["IdUser"] = new SelectList(_context.User, "IdUser", "Nama", pesanan.IdUserNavigation);
+            ViewData["IdMeja"] = new SelectList(_context.Meja, "IdMeja", "NomorMeja", pesanan.IdMeja);
             return View(pesanan);
         }
 
@@ -132,7 +132,7 @@ namespace Projek_Restoran.Controllers
             ViewData["IdJenisPesanan"] = new SelectList(_context.JenisPesanan, "IdJenisPesanan", "IdJenisPesanan", pesanan.IdJenisPesanan);
             ViewData["IdProduk"] = new SelectList(_context.Produk, "IdProduk", "IdProduk", pesanan.IdProduk);
             ViewData["IdUser"] = new SelectList(_context.User, "IdUser", "IdUser", pesanan.IdUser);
-            ViewData["IdUser"] = new SelectList(_context.Meja, "IdMeja", "IdMeja", pesanan.IdUser);
+            ViewData["IdMeja"] = new SelectList(_context.Meja, "IdMeja", "IdMeja", pesanan.IdMeja);
             return View(pesanan);
         }
 
@@ -147,8 +147,8 @@ namespace Projek_Restoran.Controllers
             var pesanan = await _context.Pesanan
                 .Include(p => p.IdJenisPesananNavigation)
                 .Include(p => p.IdProdukNavigation)
-                .Include(p => p.IdUser1)
                 .Include(p => p.IdUserNavigation)
+                .Include(p => p.IdMejaNavigation)
                 .FirstOrDefaultAsync(m => m.IdPesanan == id);
             if (pesanan == null)
             {

@@ -1,10 +1,10 @@
 ﻿@model Projek_Restoran.Models.Pesanan
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Tambah";
 }
 
-<h2>Create</h2>
+<h2>@ViewData["Title"]</h2>
 
 <h4>Pesanan</h4>
 <hr />
@@ -28,26 +28,25 @@
                 <span asp-validation-for="Tanggal" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="IdProduk" class="control-label">Produk</label>
+                <select asp-for="IdProduk" class="form-control" asp-items="ViewBag.IdProduk"></select>
+            </div>
+            <div class="form-group">
                 <label asp-for="Keterangan" class="control-label">Keterangan</label>
                 <input asp-for="Keterangan" class="form-control" />
                 <span asp-validation-for="Keterangan" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdProduk" class="control-label">Produk</label>
-                <select asp-for="IdProduk" class ="form-control" asp-items="ViewBag.IdProduk"></select>
-            </div>
-            <div class="form-group">
                 <label asp-for="IdJenisPesanan" class="control-label">Jenis Pesanan</label>
-                <select asp-for="IdJenisPesanan" class ="form-control" asp-items="ViewBag.IdJenisPesanan"></select>
+                <select asp-for="IdJenisPesanan" class="form-control" asp-items="ViewBag.IdJenisPesanan"></select>
             </div>
             <div class="form-group">
                 <label asp-for="IdMeja" class="control-label">Meja</label>
-                <input asp-for="IdMeja" class="form-control" />
-                <span asp-validation-for="IdMeja" class="text-danger"></span>
+                <select asp-for="IdMeja" class="form-control" asp-items="ViewBag.IdMeja"></select>
             </div>
             <div class="form-group">
-                <label asp-for="IdUser" class="control-label">User</label>
-                <select asp-for="IdUser" class ="form-control" asp-items="ViewBag.IdUser"></select>
+                <label asp-for="IdUser" class="control-label">Admin</label>
+                <select asp-for="IdUser" class="form-control" asp-items="ViewBag.IdUser"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Tambah" class="btn btn-default" />
