@@ -19,9 +19,16 @@ namespace Projek_Restoran.Controllers
         }
 
         // GET: Kategori
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string srch)
         {
-            return View(await _context.Kategori.ToListAsync());
+            var menu = from m in _context.Kategori select m;
+
+            if (!string.IsNullOrEmpty(srch))
+            {
+                menu = menu.Where(s => s.NamaKategori.Contains(srch));
+            }
+
+            return View(await menu.ToListAsync());
         }
 
         // GET: Kategori/Details/5

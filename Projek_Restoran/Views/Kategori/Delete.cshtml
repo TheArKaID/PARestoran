@@ -4,7 +4,7 @@
     ViewData["Title"] = "Delete";
 }
 
-<h2>Hapus</h2>
+<h2>Hapus Data</h2>
 
 <h3>Apakah Kamu Yakin Ingin Menghapus ini ?</h3>
 <div>
@@ -21,7 +21,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdKategori" />
-        <input type="submit" value="Hapus" class="btn btn-primary" /> |
+        <input type="submit" value="Hapus" class="btn btn-danger" /> |
         <a asp-action="Index">Kembali</a>
     </form>
 </div>

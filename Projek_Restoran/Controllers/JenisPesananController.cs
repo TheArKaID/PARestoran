@@ -19,9 +19,16 @@ namespace Projek_Restoran.Controllers
         }
 
         // GET: JenisPesanan
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string srch)
         {
-            return View(await _context.JenisPesanan.ToListAsync());
+            var menu = from m in _context.JenisPesanan select m;
+
+            if (!string.IsNullOrEmpty(srch))
+            {
+                menu = menu.Where(s => s.NamaJenisPesanan.Contains(srch));
+            }
+
+            return View(await menu.ToListAsync());
         }
 
         // GET: JenisPesanan/Details/5

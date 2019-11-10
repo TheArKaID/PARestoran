@@ -19,9 +19,16 @@ namespace Projek_Restoran.Controllers
         }
 
         // GET: User
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string srch)
         {
-            return View(await _context.User.ToListAsync());
+            var menu = from m in _context.User select m;
+
+            if (!string.IsNullOrEmpty(srch))
+            {
+                menu = menu.Where(s => s.Nama.Contains(srch) || s.NoHp.Contains(srch) || s.Username.Contains(srch) || s.Password.Contains(srch));
+            }
+
+            return View(await menu.ToListAsync());
         }
 
         // GET: User/Details/5

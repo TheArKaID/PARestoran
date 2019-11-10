@@ -8,6 +8,17 @@
 
 <p>
     <a class="btn btn-info" asp-action="Create">Buat Baru</a>
+
+    @using (Html.BeginForm("Index", "User", FormMethod.Get))
+    {
+        <div class="col-md-3">
+            @Html.TextBox("srch", null, new { @class = "form-control", @placeholder = "Cari Data User" })
+        </div>
+        <div class="col-md-1">
+            <input class="btn btn-primary" type="submit" value="Search" />
+        </div>
+    }
+
 </p>
 <table class="table">
     <thead>
