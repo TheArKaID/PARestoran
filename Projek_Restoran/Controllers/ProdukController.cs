@@ -19,7 +19,7 @@ namespace Projek_Restoran.Controllers
         }
 
         // GET: Produk
-        public async Task<IActionResult> Index(string ktgr, string srch)
+        public async Task<IActionResult> Index(string ktgr, string sortOrder, string currentFilter, int? pageNumber, string srch)
         {
             
             var ketList = new List<string>();
@@ -38,8 +38,46 @@ namespace Projek_Restoran.Controllers
                 menu = menu.Where(s => s.Nama.Contains(srch) || s.Harga.ToString().Contains(srch) || s.IdKategoriNavigation.NamaKategori.Contains(srch));
             }
 
+
+            //sort Order
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    menu = menu.OrderByDescending(s => s.IdKategoriNavigation.NamaKategori);
+                    break;
+                case "Date":
+                    menu = menu.OrderBy(s => s.Harga);
+                    break;
+                case "date_desc":
+                    menu = menu.OrderByDescending(s => s.Harga);
+                    break;
+                default: //name ascending
+                    menu = menu.OrderBy(s => s.IdKategoriNavigation.NamaKategori);
+                    break;
+            }
+
+            //PagedList
+            ViewData["CurrentSort"] = sortOrder;
+
+            if (srch != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                srch = currentFilter;
+            }
+            ViewData["CurrentFilter"] = srch;
+
+
             //var wEB_ProjekAkhirContext = _context.Produk.Include(p => p.IdKategoriNavigation);
-            return View(await menu.ToListAsync());
+            //return View(await menu.ToListAsync());
+            //PagedSize Return
+            int pageSize = 5;
+            return View(await PaginatedList<Produk>.CreateAsync(menu.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Produk/Details/5

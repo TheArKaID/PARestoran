@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Projek_Restoran.Models.Meja>
+﻿@*@model IEnumerable<Projek_Restoran.Models.Meja>*@
+@model PaginatedList<Projek_Restoran.Models.Meja>
 
 @{
     ViewData["Title"] = "Meja";
@@ -26,7 +27,8 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayName("No Meja")
+                @*@Html.DisplayName("No Meja")*@
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["MejaSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">No Meja</a>
             </th>
             <th></th>
         </tr>
@@ -47,3 +49,22 @@
         }
     </tbody>
 </table>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>

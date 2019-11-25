@@ -19,7 +19,7 @@ namespace Projek_Restoran.Controllers
         }
 
         // GET: Meja
-        public async Task<IActionResult> Index(string srch)
+        public async Task<IActionResult> Index(string srch, string sortOrder, string currentFilter, int? pageNumber)
         {
             var menu = from m in _context.Meja select m;
 
@@ -28,7 +28,41 @@ namespace Projek_Restoran.Controllers
                 menu = menu.Where(s => s.NomorMeja.Contains(srch));
             }
 
-            return View(await menu.ToListAsync());
+            //membuat Sorting
+
+            ViewData["MejaSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    menu = menu.OrderByDescending(s => s.NomorMeja);
+                    break;
+                //case "Date":
+                //    menu = menu.OrderBy(s => s.NomorMeja);
+                //    break;
+                case "date_desc":
+                    menu = menu.OrderByDescending(s => s.NomorMeja);
+                    break;
+                default: //name ascending
+                    menu = menu.OrderBy(s => s.NomorMeja);
+                    break;
+            }
+            //membuat pagedlist
+            ViewData["CurrentSort"] = sortOrder;
+
+            if (srch != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                srch = currentFilter;
+            }
+            ViewData["CurrentFilter"] = srch;
+
+            //return View(await menu.ToListAsync());
+            int pageSize = 5;
+            return View(await PaginatedList<Meja>.CreateAsync(menu.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
 
