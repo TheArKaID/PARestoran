@@ -19,7 +19,7 @@ namespace Projek_Restoran.Controllers
         }
 
         // GET: Pesanan
-        public async Task<IActionResult> Index(string Srch, string Jenis, string Meja, string Admin, string Tanggal)
+        public async Task<IActionResult> Index(string Srch, string Jenis, string Meja, string Admin, string Tanggal, string sortOrder, string currentFilter, int? pageNumber)
         {
             var listJenis = new List<string>();
             var listMeja = new List<string>();
@@ -38,6 +38,22 @@ namespace Projek_Restoran.Controllers
             ViewBag.Admin = new SelectList(listAdmin);
 
             var data = from Data in _context.Pesanan.Include(p => p.IdJenisPesananNavigation).Include(p => p.IdProdukNavigation).Include(p => p.IdUserNavigation).Include(p => p.IdMejaNavigation) select Data;
+
+            //Paged List
+            ViewData["CurrentSort"] = sortOrder;
+
+            if (Srch != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                Srch = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = Srch;
+            int pageSize = 5;
+
 
             if (!string.IsNullOrEmpty(Jenis) || !string.IsNullOrWhiteSpace(Jenis))
             {
@@ -64,8 +80,30 @@ namespace Projek_Restoran.Controllers
             {
                 data = data.Where(x => x.NamaCustomer.Contains(Srch) || x.IdProdukNavigation.Nama.Contains(Srch) || x.Jumlah.Contains(Srch) || x.IdJenisPesananNavigation.NamaJenisPesanan.Contains(Srch) || x.IdMejaNavigation.NomorMeja.Contains(Srch) || x.Keterangan.Contains(Srch) || x.IdUserNavigation.Nama.Contains(Srch));
             }
-            
-            return View(await data.ToListAsync());
+
+
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["NomejaSortParm"] = sortOrder == "Nomeja" ? "nomeja_desc" : "Nomeja";
+
+            //Sorting Order
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    data = data.OrderByDescending(s => s.NamaCustomer);
+                    break;
+                case "Nomeja":
+                    data = data.OrderBy(s => s.IdMejaNavigation.NomorMeja);
+                    break;
+                case "nomeja_desc":
+                    data = data.OrderByDescending(s => s.IdMejaNavigation.NomorMeja);
+                    break;
+                default: //name ascending
+                    data = data.OrderBy(s => s.NamaCustomer);
+                    break;
+            }
+
+            return View(await PaginatedList<Pesanan>.CreateAsync(data.AsNoTracking(), pageNumber ?? 1, pageSize));
+            //return View(await data.ToListAsync());
         }
 
         // GET: Pesanan/Details/5
