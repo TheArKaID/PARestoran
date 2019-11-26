@@ -19,16 +19,45 @@ namespace Projek_Restoran.Controllers
         }
 
         // GET: JenisPesanan
-        public async Task<IActionResult> Index(string srch)
+        public async Task<IActionResult> Index(string srch, string sortOrder, string currentFilter, int? pageNumber)
         {
             var menu = from m in _context.JenisPesanan select m;
+
+            //Paged List
+            ViewData["CurrentSort"] = sortOrder;
+
+            if (srch != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                srch = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = srch;
+            int pageSize = 5;
 
             if (!string.IsNullOrEmpty(srch))
             {
                 menu = menu.Where(s => s.NamaJenisPesanan.Contains(srch));
             }
 
-            return View(await menu.ToListAsync());
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            //Sorting Order
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    menu = menu.OrderByDescending(s => s.NamaJenisPesanan);
+                    break;
+                default: //name ascending
+                    menu = menu.OrderBy(s => s.NamaJenisPesanan);
+                    break;
+            }
+
+            return View(await PaginatedList<JenisPesanan>.CreateAsync(menu.AsNoTracking(), pageNumber ?? 1, pageSize));
+            //return View(await menu.ToListAsync());
         }
 
         // GET: JenisPesanan/Details/5
