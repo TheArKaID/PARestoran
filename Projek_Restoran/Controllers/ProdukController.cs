@@ -40,22 +40,22 @@ namespace Projek_Restoran.Controllers
 
 
             //sort Order
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["PesananSortParm"] = String.IsNullOrEmpty(sortOrder) ? "pesanan_desc" : "";
+            ViewData["HargaSortParm"] = sortOrder == "Harga" ? "harga_desc" : "Harga";
 
             switch (sortOrder)
             {
-                case "name_desc":
-                    menu = menu.OrderByDescending(s => s.IdKategoriNavigation.NamaKategori);
+                case "pesanan_desc":
+                    menu = menu.OrderByDescending(s => s.Nama);
                     break;
-                case "Date":
+                case "Harga":
                     menu = menu.OrderBy(s => s.Harga);
                     break;
-                case "date_desc":
+                case "harga_desc":
                     menu = menu.OrderByDescending(s => s.Harga);
                     break;
                 default: //name ascending
-                    menu = menu.OrderBy(s => s.IdKategoriNavigation.NamaKategori);
+                    menu = menu.OrderBy(s => s.Nama);
                     break;
             }
 

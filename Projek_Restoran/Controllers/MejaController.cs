@@ -30,17 +30,11 @@ namespace Projek_Restoran.Controllers
 
             //membuat Sorting
 
-            ViewData["MejaSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["MejaSortParm"] = sortOrder == "nomeja_desc" ? "Nomeja" : "nomeja_desc";
 
             switch (sortOrder)
             {
-                case "name_desc":
-                    menu = menu.OrderByDescending(s => s.NomorMeja);
-                    break;
-                //case "Date":
-                //    menu = menu.OrderBy(s => s.NomorMeja);
-                //    break;
-                case "date_desc":
+                case "nomeja_desc":
                     menu = menu.OrderByDescending(s => s.NomorMeja);
                     break;
                 default: //name ascending

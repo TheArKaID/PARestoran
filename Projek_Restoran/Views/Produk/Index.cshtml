@@ -31,11 +31,11 @@
         <tr>
             <th>
                 @*@Html.DisplayNameFor(model => model.Nama)*@
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Nama Pesanan</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["PesananSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Nama Pesanan</a>
             </th>
             <th>
                 @*@Html.DisplayNameFor(model => model.Harga)*@
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Harga</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["HargaSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Harga</a>
             </th>
             <th>
                 @Html.DisplayName("Kategori")
