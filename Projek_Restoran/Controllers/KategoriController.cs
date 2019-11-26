@@ -19,16 +19,45 @@ namespace Projek_Restoran.Controllers
         }
 
         // GET: Kategori
-        public async Task<IActionResult> Index(string srch)
+        public async Task<IActionResult> Index(string srch, string sortOrder, string currentFilter, int? pageNumber)
         {
             var menu = from m in _context.Kategori select m;
+
+            //Paged List
+            ViewData["CurrentSort"] = sortOrder;
+
+            if (srch != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                srch = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = srch;
+            int pageSize = 5;
 
             if (!string.IsNullOrEmpty(srch))
             {
                 menu = menu.Where(s => s.NamaKategori.Contains(srch));
             }
 
-            return View(await menu.ToListAsync());
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            //Sorting Order
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    menu = menu.OrderByDescending(s => s.NamaKategori);
+                    break;
+                default: //name ascending
+                    menu = menu.OrderBy(s => s.NamaKategori);
+                    break;
+            }
+
+            return View(await PaginatedList<Kategori>.CreateAsync(menu.AsNoTracking(), pageNumber ?? 1, pageSize));
+            //return View(await menu.ToListAsync());
         }
 
         // GET: Kategori/Details/5
