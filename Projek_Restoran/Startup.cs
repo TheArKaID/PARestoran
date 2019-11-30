@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Projek_Restoran.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Projek_Restoran
 {
@@ -35,6 +36,9 @@ namespace Projek_Restoran
 
             services.AddDbContext<Models.WEB_ProjekAkhirContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+
+            //services.AddDefaultIdentity<IdentityUser>()
+            //.AddEntityFrameworkStores<WEB_ProjekAkhirContext>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -54,6 +58,8 @@ namespace Projek_Restoran
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

@@ -1,10 +1,12 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Projek_Restoran.Models
 {
-    public partial class WEB_ProjekAkhirContext : DbContext
+    public partial class WEB_ProjekAkhirContext : IdentityDbContext
     {
         public WEB_ProjekAkhirContext()
         {
@@ -162,6 +164,8 @@ namespace Projek_Restoran.Models
                     .HasMaxLength(20)
                     .IsUnicode(false);
             });
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
