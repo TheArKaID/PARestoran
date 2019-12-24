@@ -1,0 +1,31 @@
+﻿@model Projek_Restoran.Models.Upload.FilesViewModel
+
+<h2>List Bukti Pembayaran</h2>
+
+<table class="table">
+    <tr>
+        <td>
+            Nama
+        </td>
+        <td>
+            Path
+        </td>
+    </tr>
+    @foreach (var item in Model.Files)
+    {
+        <tr>
+            <td>
+                <a asp-action="Download"
+                   asp-route-filename="@item.Name">
+                    @item.Name
+                </a>
+            </td>
+            <td>
+                @item.Path
+            </td>
+        </tr>
+    }
+</table>
+<ul>
+    
+</ul>

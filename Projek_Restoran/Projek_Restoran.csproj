@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Data\" />
+    <Folder Include="wwwroot\bukti\" />
   </ItemGroup>
 
 </Project>
